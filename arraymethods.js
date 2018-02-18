@@ -170,9 +170,29 @@ Collection.prototype.push = function(band, album, song) {
     albums.push({album, id}),
     id = songs.length+1;
     songs.push({song, id})
-    
+    console.log("Pushed in a song by: " + band + "..." + song + "..." + album);
 }
 
+Collection.prototype.unshift = function(band, album, song) { 
+    let _id = 1;
+    artists.unshift({band, _id}),
+    artists.forEach(function(item, index){
+        console.log(item);
+        item.id = _id++;
+    });
+    _id = 1;
+    albums.unshift({album, _id}),
+    albums.forEach(function(item, index){
+        item.id = _id++;
+    });
+    _id = 1;
+    songs.unshift({song, _id}),
+    songs.forEach(function(item, index){
+        item.id = _id++;
+    });
+    _id = 1;
+    console.log("Inserted a song by: " + band + "..." + song + "..." + album);
+}
 Collection.prototype.returnID = function(ID) {
     let _artist, _album, _song;
     artists.forEach(function(item){
@@ -193,16 +213,18 @@ Collection.prototype.returnID = function(ID) {
             _song = item; 
         }
     });
+    
     return {_artist, _album, _song};
 }
 
 
 // Collection object which needs to be connected to HTML
 let musicCollection = new Collection(selection);
-console.log(musicCollection);
+
 
 musicCollection.sayName();
 musicCollection.push("Beyonce", "B'day", "Deja Vu");
 console.log(musicCollection.returnID(7));
-
+musicCollection.unshift("Incubus","Make Yourself", "Pardon Me");
+musicCollection.sayName();
 
